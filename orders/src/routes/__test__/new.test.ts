@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
 
-it('Dummy test', async () => {
+it('returns an error if the ticket does not exist', async () => {
   const ticketId = mongoose.Types.ObjectId();
 
   await request(app)
@@ -11,7 +11,6 @@ it('Dummy test', async () => {
     .send({ ticketId })
     .expect(404);
 });
-
 
 it('returns an error if the ticket is already reserved', async () => {});
 
