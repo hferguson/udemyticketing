@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import { app } from './app';
 import {natsWrapper} from './nats-wrapper';
+import { TicketCreatedListener } from './events/listeners/ticket-created-listener';
+import { TicketUpdatedListener } from './events/listeners/ticket-updated-listener';
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -38,7 +40,11 @@ const start = async () => {
 
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
-
+    console.log("Initializing listeners for Orders service");
+    new TicketCreatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen();
+    console.log("Listeners initialized");
+    
     await mongoose.connect(dbURL);  // No options since v6
     console.log("Connected to MongoDB");
   } catch (err) {
