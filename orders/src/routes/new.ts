@@ -9,7 +9,7 @@ import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 900;
+const EXPIRATION_WINDOW_SECONDS = 60; //900;
 
 router.post('/api/orders', requireAuth, [
   body('ticketId')

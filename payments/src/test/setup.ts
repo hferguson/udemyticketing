@@ -14,7 +14,7 @@ declare global {
   
  
 beforeAll(async () => {
-  //console.log("beforeAll called for tickets");
+  console.log("beforeAll called for tickets");
   process.env.JWT_KEY = 'asdf123';
 
   mongo = await MongoMemoryServer.create();
