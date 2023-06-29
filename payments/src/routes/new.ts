@@ -32,7 +32,8 @@ router.post('/api/payments',
   async (req: Request, res: Response) => {
     const { token, orderId } = req.body;
     const order = await Order.findById(orderId);
-
+console.log("Begin payments API call");
+console.log(`OrderID: ${orderId}, payment ID ${token}`);
     if (!order) {
       throw new NotFoundError();
     }
