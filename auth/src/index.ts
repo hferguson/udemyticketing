@@ -10,6 +10,7 @@ const start = async () => {
     throw new Error('No MONGO_URI env variable set');
   }
   try {
+    console.log("Connecting to database...");
     const dbURL = process.env.MONGO_URI;
     await mongoose.connect(dbURL);  // No options since v6
     console.log("Connected to MongoDB");
